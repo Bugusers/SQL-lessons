@@ -25,8 +25,8 @@ CREATE TABLE t_schedule(
 
 -- many-to-many звідна таблиця
 CREATE TABLE t_lesson_schedule (
-    lesson_id INT,
-    schedule_id INT,
+    lesson_id INT NOT NULL,
+    schedule_id INT NOT NULL,
     PRIMARY KEY (lesson_id, schedule_id),
     FOREIGN KEY (lesson_id) REFERENCES t_lesson(id) ON DELETE CASCADE,
     FOREIGN KEY (schedule_id) REFERENCES t_schedule(id) ON DELETE CASCADE
