@@ -1,17 +1,24 @@
 package org.db_lessons;
 
 import org.db_lessons.dao.LessonDao;
+import org.db_lessons.dbconnection.DataBaseConnection;
 import org.db_lessons.models.Homework;
 import org.db_lessons.models.Lesson;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Collection;
 
 
 public class Main {
 
-    public static void main(String[] args) {
-        LessonDao lessonDao = new LessonDao();
+    public static void main(String[] args) throws SQLException {
+        String mysqlUrl = System.getenv("MYSQL_URL");
+        String mysqlUser = System.getenv("MYSQL_USER");
+        String mysqlPassword = System.getenv("MYSQL_PASSWORD");
+
+        DataBaseConnection dataBaseConnection = new DataBaseConnection(mysqlUrl, mysqlUser, mysqlPassword);
+        LessonDao lessonDao = new LessonDao(dataBaseConnection.getConnection());
 
         // Task 1
         Lesson lesson = Lesson.builder()
@@ -28,7 +35,7 @@ public class Main {
         lessonDao.addLesson(lesson);
 
         // Task 2
-        Lesson deleteLessonById = lessonDao.deleteLessonById(5);
+        Lesson deleteLessonById = lessonDao.deleteLessonById(7);
         System.out.println("Deleted lesson: ");
         System.out.println(deleteLessonById);
 

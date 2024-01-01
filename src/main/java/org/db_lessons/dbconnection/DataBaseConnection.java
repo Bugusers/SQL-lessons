@@ -1,16 +1,16 @@
 package org.db_lessons.dbconnection;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public class DataBaseConnection {
-    private final static String URL = "jdbc:mysql://localhost:3306/homework";
-    private final static String USER = "root";
-    private final static String PASSWORD = "thebloodcoon";
+    private final String URL;
+    private final String USER;
+    private final String PASSWORD;
+
 
     static {
         try {
@@ -20,8 +20,13 @@ public class DataBaseConnection {
         }
     }
 
+    public DataBaseConnection(String url, String user, String password) throws SQLException{
+        this.URL = url;
+        this.PASSWORD = password;
+        this.USER = user;
+    }
 
-    public static Connection getConnection() {
+    public Connection getConnection() {
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
 
