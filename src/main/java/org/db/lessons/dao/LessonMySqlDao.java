@@ -1,37 +1,42 @@
-package org.db_lessons.dao;
+package org.db.lessons.dao;
 
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-import org.db_lessons.model.entity.Lesson;
+import org.jvnet.hk2.annotations.Service;
+import org.db.lessons.model.entity.Lesson;
 
 import java.util.List;
 
-@RequiredArgsConstructor
+@Service
 public class LessonMySqlDao implements LessonDao {
-    private final EntityManager entityManager;
+    @Inject
+    private EntityManager entityManager;
 
     @Override
     @Transactional
-    public void save(Lesson lesson) {
+    public Lesson save(Lesson lesson) {
         entityManager.persist(lesson);
+
+        return lesson;
     }
 
     @Override
     @Transactional
-    public void update(Lesson lesson) {
-        entityManager.merge(lesson);
+    public Lesson update(Lesson lesson) {
+        return entityManager.merge(lesson);
     }
 
     @Override
     @Transactional
-    public void delete(Lesson lesson) {
+    public Lesson delete(Lesson lesson) {
         entityManager.remove(lesson);
+
+        return lesson;
     }
 
     @Override
-
     public Lesson findById(Long lessonId) {
         return entityManager.find(Lesson.class, lessonId);
     }

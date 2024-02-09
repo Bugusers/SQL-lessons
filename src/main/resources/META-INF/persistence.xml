@@ -8,8 +8,8 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>org.db_lessons.model.entity.Lesson</class>
-        <class>org.db_lessons.model.entity.Homework</class>
+        <class>org.db.lessons.model.entity.Lesson</class>
+        <class>org.db.lessons.model.entity.Homework</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="URL"/>
